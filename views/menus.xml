@@ -1,0 +1,8 @@
+<odoo>
+    <menuitem id="menu_real_estate_root" name="Real Estate" sequence="10"/>
+    <menuitem id="menu_property_real_estate" name="Properties" parent="menu_real_estate_root" action="action_property"/>
+    <menuitem id="menu_agent_real_estate" name="Agents" parent="menu_real_estate_root" action="action_agent"/>
+    <menuitem id="menu_lease_real_estate" name="Leases" parent="menu_real_estate_root" action="action_lease"/>
+    <menuitem id="menu_sale_real_estate" name="Sales" parent="menu_real_estate_root" action="action_sale"/>
+    <menuitem id="menu_tenant_real_estate" name="Tenants" parent="menu_real_estate_root" action="action_tenant"/>
+</odoo>

@@ -1,0 +1,136 @@
+<odoo>
+    <!-- Form view to property model -->
+    <record id="view_property_form" model="ir.ui.view">
+        <field name="name">property.real.estate.form</field>
+        <field name="model">property.real.estate</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="available,pending,sold,rented"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Sold" bg_color="text-bg-danger" invisible="status != 'sold'"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="address"/>
+                            <field name="city"/>
+                            <field name="state" class="o_address_state"/>
+                            <field name="country_id" class="o_address_country"/>
+                            <field name="zip_code" class="o_address_zip"/>
+                            <field name="property_type_id"/>
+                            <field name="partner_id"/>
+                        </group>
+                        <group>
+                            <field name="price"/>
+                            <field name="status"/>
+                            <field name="area"/>
+                            <field name="num_rooms"/>
+                            <field name="num_bathrooms"/>
+                            <field name="num_floors"/>
+                            <field name="condition"/>
+                            <field name="amenities" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group string="Images">
+                        <field name="image" widget="image"/>
+                        <field name="pictures_of_property">
+                            <tree editable="bottom">
+                                <field name="image" widget="image"/>
+                                <field name="description"/>
+                            </tree>
+                            <form string="Add Image">
+                                <group>
+                                    <field name="image" widget="image"/>
+                                    <field name="description"/>
+                                </group>
+                            </form>
+                        </field>
+                    </group>
+                    <group string="Location">
+                        <field name="latitude"/>
+                        <field name="longitude"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view to property model -->
+    <record id="view_property_tree" model="ir.ui.view">
+        <field name="name">property.real.estate.tree</field>
+        <field name="model">property.real.estate</field>
+        <field name="arch" type="xml">
+            <tree string="Properties">
+                <field name="name"/>
+                <field name="property_type_id"/>
+                <field name="city"/>
+                <field name="status"
+                       decoration-muted="status == 'available'"
+                       decoration-warning="status == 'pending'"
+                       decoration-success="status == 'sold'"
+                       decoration-danger="status == 'rented'"
+                       widget="badge"/>
+                <field name="price"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban view to property model -->
+    <record id="view_property_kanban" model="ir.ui.view">
+        <field name="name">property.real.estate.kanban</field>
+        <field name="model">property.real.estate</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="image"/>
+                <field name="name"/>
+                <field name="property_type_id"/>
+                <field name="city"/>
+                <field name="status"/>
+                <field name="price"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="ribbon ribbon-top-right o_small" invisible="status != 'sold'">
+                               <span class="text-bg-danger">Sold</span>
+                            </div>
+                            <div class="o_kanban_image_fill_left d-none d-md-block">
+                                <img t-att-src="kanban_image('property.real.estate', 'image', record.id.raw_value)"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        <field name="name"/>
+                                    </li>
+                                    <li>
+                                        <field name="status"/>
+                                    </li>
+                                    <li>
+                                        <field name="city"/>
+                                    </li>
+                                    <li>
+                                        <field name="address"/>
+                                    </li>
+                                    <li>
+                                        <field name="price"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_property" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">property.real.estate</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+</odoo>

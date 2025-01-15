@@ -1,0 +1,87 @@
+<odoo>
+    <!-- Form view to agent model -->
+    <record id="view_agent_form" model="ir.ui.view">
+        <field name="name">agent.real.estate.form</field>
+        <field name="model">agent.real.estate</field>
+        <field name="arch" type="xml">
+            <form string="Agent">
+                <sheet>
+                    <group>
+                        <field name="image" widget='image' class="oe_avatar" style="float: right;"/>
+                        <field name="name"/>
+                        <field name="phone"/>
+                        <field name="email"/>
+                        <field name="years_experience"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view to agent model -->
+    <record id="view_agent_tree" model="ir.ui.view">
+        <field name="name">agent.real.estate</field>
+        <field name="model">agent.real.estate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="years_experience"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban view to agent model -->
+    <record id="view_agent_kanban" model="ir.ui.view">
+        <field name="name">agent.real.estate.kanban</field>
+        <field name="model">agent.real.estate</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="image"/>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="years_experience"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="o_kanban_image_fill_left d-none d-md-block">
+                                <img t-att-src="kanban_image('agent.real.estate', 'image', record.id.raw_value)"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                Name:
+                                <strong class="o_kanban_record_title oe_partner_heading text-center"><field name="name"/></strong>
+                                <ul>
+                                    <li>
+                                        Phone:
+                                        <field name="phone"/>
+                                    </li>
+                                    <li>
+                                        Email:
+                                        <field name="email"/>
+                                    </li>
+                                    <li>
+                                        Years of Experience:
+                                        <field name="years_experience"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_agent" model="ir.actions.act_window">
+        <field name="name">Agents</field>
+        <field name="res_model">agent.real.estate</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+</odoo>

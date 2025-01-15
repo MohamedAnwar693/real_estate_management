@@ -1,0 +1,86 @@
+<odoo>
+    <!-- Form view to sale model -->
+    <record id="view_sale_form" model="ir.ui.view">
+        <field name="name">sale.real.estate.form</field>
+        <field name="model">sale.real.estate</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="sale_date"/>
+                        <field name="sale_price"/>
+                        <field name="buyer_name"/>
+                    </group>
+                    <group>
+                        <field name="property_id"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view to sale model -->
+    <record id="view_sale_tree" model="ir.ui.view">
+        <field name="name">sale.real.estate.tree</field>
+        <field name="model">sale.real.estate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="property_id"/>
+                <field name="buyer_name"/>
+                <field name="sale_date"/>
+                <field name="sale_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban view to sale model -->
+    <record id="view_sale_kanban" model="ir.ui.view">
+        <field name="name">sale.real.estate.kanban</field>
+        <field name="model">sale.real.estate</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="property_id"/>
+                <field name="buyer_name"/>
+                <field name="sale_date"/>
+                <field name="sale_price"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        Property:
+                                        <field name="property_id"/>
+                                    </li>
+                                    <li>
+                                        Buyer Name:
+                                        <field name="buyer_name"/>
+                                    </li>
+                                    <li>
+                                        Sale Date:
+                                        <field name="sale_date"/>
+                                    </li>
+                                    <li>
+                                        Sale Price:
+                                        <field name="sale_price"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_sale" model="ir.actions.act_window">
+        <field name="name">Sales</field>
+        <field name="res_model">sale.real.estate</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+</odoo>

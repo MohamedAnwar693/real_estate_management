@@ -1,0 +1,93 @@
+<odoo>
+    <!-- Form view to lease model -->
+    <record id="view_lease_form" model="ir.ui.view">
+        <field name="name">lease.real.estate.form</field>
+        <field name="model">lease.real.estate</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="rent_amount"/>
+                    </group>
+                    <group>
+                        <field name="property_id"/>
+                        <field name="tenant_id"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view to lease model -->
+    <record id="view_lease_tree" model="ir.ui.view">
+        <field name="name">lease.real.estate.tree</field>
+        <field name="model">lease.real.estate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="property_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="tenant_id"/>
+                <field name="rent_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban view to lease model -->
+    <record id="view_lease_kanban" model="ir.ui.view">
+        <field name="name">lease.real.estate.kanban</field>
+        <field name="model">lease.real.estate</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="property_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="tenant_id"/>
+                <field name="rent_amount"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        Property:
+                                        <field name="property_id"/>
+                                    </li>
+                                    <li>
+                                        Start Date:
+                                        <field name="start_date"/>
+                                    </li>
+                                    <li>
+                                        End Date:
+                                        <field name="end_date"/>
+                                    </li>
+                                    <li>
+                                        Tenant:
+                                        <field name="tenant_id"/>
+                                    </li>
+                                    <li>
+                                        Rent:
+                                        <field name="rent_amount"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_lease" model="ir.actions.act_window">
+        <field name="name">Lease</field>
+        <field name="res_model">lease.real.estate</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+</odoo>
